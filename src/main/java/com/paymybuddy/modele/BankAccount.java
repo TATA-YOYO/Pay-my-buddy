@@ -3,8 +3,8 @@ package com.paymybuddy.modele;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "connection")
-public class Connection {
+@Table(name = "bank_account")
+public class BankAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,8 +14,11 @@ public class Connection {
     @Column(name = "user_id")
     int userId;
 
-    @Column(name = "beneficiary_user_email")
-    String beneficiaryUserEmail;
+    @Column(name = "iban")
+    String iban;
+
+    @Column(name = "bic")
+    String bic;
 
     public int getId() {
         return id;
@@ -33,11 +36,19 @@ public class Connection {
         this.userId = userId;
     }
 
-    public String getBeneficiaryUserEmail() {
-        return beneficiaryUserEmail;
+    public String getIban() {
+        return iban;
     }
 
-    public void setBeneficiaryUserEmail(String beneficiaryUserEmail) {
-        this.beneficiaryUserEmail = beneficiaryUserEmail;
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public String getBic() {
+        return bic;
+    }
+
+    public void setBic(String bic) {
+        this.bic = bic;
     }
 }
