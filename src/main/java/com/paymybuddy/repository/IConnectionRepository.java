@@ -1,9 +1,9 @@
 package com.paymybuddy.repository;
 
-import com.paymybuddy.modele.Transfer;
+import com.paymybuddy.modele.Connection;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TransferRepository extends CrudRepository<Transfer,Integer> {
+public interface IConnectionRepository extends CrudRepository<Connection, Integer> {
 }
