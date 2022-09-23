@@ -9,19 +9,30 @@ public class UserApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    int id;
+    private int id;
 
     @Column(name = "nickname")
-    String nickname;
+    private String nickname;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     @Column(name = "passWord")
-    String passWord;
+    private String passWord;
+
+    @Column(name = "pay")
+    private float pay = 0;
 
     @Column(name = "admin_status")
-    boolean adminStatus = false;
+    private boolean adminStatus = false;
+
+    public float getPay() {
+        return pay;
+    }
+
+    public void setPay(float pay) {
+        this.pay = pay;
+    }
 
     public int getId() {
         return id;

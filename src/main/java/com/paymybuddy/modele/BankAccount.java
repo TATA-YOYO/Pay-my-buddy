@@ -6,6 +6,8 @@ import javax.persistence.*;
 @Table(name = "bank_account")
 public class BankAccount {
 
+    //  TODO make private all argument
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

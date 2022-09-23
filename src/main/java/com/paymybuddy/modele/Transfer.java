@@ -8,6 +8,8 @@ import java.util.Date;
 @Table(name = "Transfer")
 public class Transfer {
 
+    //  TODO make private all argument
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

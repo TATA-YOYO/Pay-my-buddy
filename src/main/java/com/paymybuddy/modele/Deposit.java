@@ -7,6 +7,8 @@ import java.util.Date;
 @Table(name = "Deposit")
 public class Deposit {
 
+    //  TODO make private all argument
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
