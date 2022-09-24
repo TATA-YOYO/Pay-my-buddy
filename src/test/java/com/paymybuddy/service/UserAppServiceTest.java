@@ -2,65 +2,66 @@ package com.paymybuddy.service;
 
 import com.paymybuddy.modele.UserApp;
 import com.paymybuddy.repository.IUserAppRepository;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class UserAppServiceTest {
 
-    @Autowired
-    UserAppService userAppService;
 
-    @Autowired
+    UserAppService userAppService = new UserAppService();
+
+    @Mock
     IUserAppRepository iUserAppRepository;
 
-    @AfterEach
-    public void cleaningTask() {
-        iUserAppRepository.deleteAll();
+    @BeforeEach
+    public void setup() {
+        userAppService.iUserAppRepository = iUserAppRepository;
     }
 
     @Test
     public void addUserAppTest() {
+        //Arrange
+        when(iUserAppRepository.save(any(UserApp.class))).thenReturn(any(UserApp.class));
 
         //Act
         UserApp result = userAppService.addUserApp("test01", "addUserAppTest@test01.fr", "123456");
 
         //Assert
-        assertEquals(result.getEmail(), "addUserAppTest@test01.fr");
-
+        verify(iUserAppRepository, Mockito.times(1)).save(any(UserApp.class));
     }
 
     @Test
     public void getUserAppByEmailTest() {
         //Arrange
-        userAppService.addUserApp("test01", "getUserAppByEmail@test01.fr", "123456");
+        when(iUserAppRepository.findByEmail(any(String.class))).thenReturn(null);
 
         //Act
         Optional<UserApp> resultContainer = userAppService.getUserAppByEmail("getUserAppByEmail@test01.fr");
-        UserApp result = resultContainer.get();
 
         //Assert
-        assertEquals(result.getEmail(), "getUserAppByEmail@test01.fr");
+        verify(iUserAppRepository, Mockito.times(1)).findByEmail(any(String.class));
     }
 
     @Test
     public void getUserAppTest() {
         //Arrange
-        userAppService.addUserApp("test01", "getUserApp@test01.fr", "123456");
-        Optional<UserApp> Container = userAppService.getUserAppByEmail("getUserApp@test01.fr");
-        int id = Container.get().getId();
+        when(iUserAppRepository.findById(any(Integer.class))).thenReturn(null);
+
         //Act
-        Optional<UserApp> resultContainer = userAppService.getUserApp(id);
-        UserApp result = resultContainer.get();
+        Optional<UserApp> resultContainer = userAppService.getUserApp(12354);
 
         //Assert
-        assertEquals(result.getEmail(), "getUserApp@test01.fr");
+        verify(iUserAppRepository, Mockito.times(1)).findById(any());
     }
 
 }
